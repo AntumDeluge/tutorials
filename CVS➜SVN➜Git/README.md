@@ -237,7 +237,7 @@ See above for converting the dump file to a local Subversion repository, & in tu
 ### [References](#contents)
 
 + [Audacity wiki: CVS To SVN Migration](http://wiki.audacityteam.org/wiki/CVS_To_SVN_Migration)
-+ [Author: (no author) not defined in authors file]: https://www.guyrutenberg.com/2011/11/09/author-no-author-not-defined-in-authors-file/
++ [Author: (no author) not defined in authors file](https://www.guyrutenberg.com/2011/11/09/author-no-author-not-defined-in-authors-file/)
 + [Backing Up & Restoring a Remote SVN Repository](http://www.crowbarsolutions.com/backing-up-restoring-a-remote-svn-repository/)
 + [converting sourceforge.net repository from CVS to subversion](http://uucode.com/blog/2010/03/09/converting-sourceforgenet-repository-from-cvs-to-subversion/)
 + [How to migrate SVN repository with history to a new Git repository?](http://stackoverflow.com/questions/79165/how-to-migrate-svn-repository-with-history-to-a-new-git-repository)
