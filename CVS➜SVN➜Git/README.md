@@ -199,7 +199,8 @@ This section will show you how to convert a CVS repository to Git. But the metho
 *Requirements: rsync, cvs2svn, & svnadmin*
 
 
-***TODO: Look up options for cvs2svn***
++ ***TODO: Look up options for cvs2svn***
++ ***TODO: Look up options for [rsync][man.rsync]***
 
 Make a local copy of the CVS repository with ***rsync***:
 
