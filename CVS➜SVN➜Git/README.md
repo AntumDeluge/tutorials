@@ -19,7 +19,7 @@ The following utilities are used in these tutorials:
 + [cvs2svn][] ([Ubuntu][deb.cvs2svn])
 + [git][] ([Ubuntu][deb.git])
 + [git-svn][] ([Ubuntu][deb.git-svn])
-+ perl
++ [perl][] ([Ubuntu][deb.perl])
 + [rsync][] ([Ubuntu][deb.rsync])
 + [svnadmin][svn] ([Ubuntu][deb.svn])
 + [svnrdump][svn] ([Ubuntu][deb.svn])
@@ -249,12 +249,14 @@ See above for converting the dump file to a local Subversion repository, & in tu
 [cvs2svn]: http://cvs2svn.tigris.org/
 [git]: http://git-scm.com/
 [git-svn]: https://git-scm.com/docs/git-svn
+[perl]: https://www.perl.org/
 [rsync]: https://rsync.samba.org/
 [svn]: http://subversion.apache.org/
 
 [deb.cvs2svn]: http://packages.ubuntu.com/cvs2svn
 [deb.git]: http://packages.ubuntu.com/git
 [deb.git-svn]: http://packages.ubuntu.com/git-svn
+[deb.perl]: http://packages.ubuntu.com/perl
 [deb.rsync]: http://packages.ubuntu.com/rsync
 [deb.svn]: http://packages.ubuntu.com/subversion
 
