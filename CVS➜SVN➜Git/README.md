@@ -25,17 +25,41 @@ The following utilities are required:
 
 
 ---
-### [Subversion to Git](#contents)
+### 1: [Subversion to Git](#contents)
 
-For this section you will need <span style="color: blue;">*rsync*</span>, <span style="color: blue;">*svnadmin*</span>, <span style="color: blue;">*svnrdump*</span>, <span style="color: blue;">*git-svn*</span>, & <span style="color: blue;">*git*</span>.
+<span style="font-size: 14px; font-style: italic;">
+For this section you will need <span style="color: blue;">rsync</span>, <span style="color: blue;">svnadmin</span>, <span style="color: blue;">svnrdump</span>, <span style="color: blue;">git-svn</span>, & <span style="color: blue;">git</span>.
+</span>
 
-#### Step 1: Option 1: Making a complete copy of a Subversion repository
+#### 1.1: Method 1: Clone a remote repository with git-svn
 
-???
+The [*git-svn*][man.git-svn] command, generally invoked as '<span style="color: blue; font-style: italic;">git svn</span>', is a tool for managing Subversion repositories with Git. It "<span style="font-style: italic;">can track a standard Subversion repository</span>".As I understand it, it basically allows you to manage a Subversion repository as though it were a [distributed version control system][wiki.dvcs]. A repository can be followed if is layed out with the common *trunk*, *branches*, & *tags* directories by using the *--stdlayout* option. Otherwise, *-T* (trunk), *-b* (branch), and/or *-t* (tags) must be used.
 
-#### Step 1: Option 2: Creating a dump of a Subversion repository
+Of the options layed out here, this is probably the simplest:
 
-##### Remote repository:
+```
+$ git svn clone --stdlayout [svn-repo-path] [git-repo]
+```
+
+Debreate project example:
+
+```
+$ git svn clone --stdlayout svn://svn.code.sf.net/p/debreate/svnroot debreate-git
+```
+
+#### 1.2: Method 2: Create a complete local copy of a remote repository
+
+##### 1.2.1: Option 1: Using svnadmin & svnsync
+
+```
+$ svnadmin create [repo-name]
+$ echo '#!/bin/sh' > [repo-name]/hooks/pre-revprop-change
+$ svnsync init file:///path/to/repo/name [remote-repo-url]
+$ svnsync sync file:///path/to/repo/name
+```
+
+<a name="git-svn-dump"></a>
+##### 1.2.2: Option 2: Using svnrdump to create a dump file
 
 ```
 $ svnrdump dump [path-to-repo] > [dump-file]
@@ -47,12 +71,6 @@ Here is an example for the [Debreate][debreate] project hosted at [SourceForge][
 $ svnrdump dump svn://svn.code.sf.net/p/debreate/svnroot debreate-svn.dump
 ```
 
-##### Local repository:
-
-???
-
-##### Converting dump to local repository (optional)
-
 With the dump file you can use <span style="color: blue;">*svnadmin*</span> to create the actual local repository:
 
 ```
@@ -60,18 +78,23 @@ $ svnadmin create [path-to-local-repo]
 $ svnadmin load [path-to-local-repo] < [dump-file]
 ```
 
-#### Step 2: Option 1: Create Git repository from Subversion repository
+##### Converting dump to local repository (optional)
 
 ???
 
-<a name="git-svn-dump"></a>
-#### Step 2: Option 2: Create Git repository from Subversion dump file
+##### 1.2.3: Checking out a local working copy (not necessary for converting to Git)
+
+```
+$ svn co file:///path/to/repo/name [output-name]
+```
+
+##### 1.2.4: Convert to Git
 
 ???
 
 
 ---
-### [CVS to Subversion](#contents)
+### 2: [CVS to Subversion](#contents)
 
 This tutorial will show you how to convert a CVS repository to Git. But the method shown here requires that it first be converted to a Subversion repository (See: [Subversion to Git](#subversion-to-git)).
 
@@ -118,6 +141,7 @@ From this point, you can follow the instructions under [**Subversion to Git**](#
 + [Backing Up & Restoring a Remote SVN Repository](http://www.crowbarsolutions.com/backing-up-restoring-a-remote-svn-repository/)
 + [converting sourceforge.net repository from CVS to subversion](http://uucode.com/blog/2010/03/09/converting-sourceforgenet-repository-from-cvs-to-subversion/)
 + [How to migrate SVN repository with history to a new Git repository?](http://stackoverflow.com/questions/79165/how-to-migrate-svn-repository-with-history-to-a-new-git-repository)
++ [Mirror a Subversion repository](http://www.microhowto.info/howto/mirror_a_subversion_repository.html)
 + [Moving a Subversion Repository to Another Server](https://www.petefreitag.com/item/665.cfm)
 
 
@@ -134,6 +158,7 @@ From this point, you can follow the instructions under [**Subversion to Git**](#
 [deb.rsync]: http://packages.ubuntu.com/rsync
 [deb.svn]: http://packages.ubuntu.com/subversion
 
+[man.git-svn]: https://linux.die.net/man/1/git-svn
 [man.rsync]: https://linux.die.net/man/1/rsync
 
 [debreate]: https://sourceforge.net/projects/debreate
@@ -141,6 +166,7 @@ From this point, you can follow the instructions under [**Subversion to Git**](#
 [wxsvg]: https://sourceforge.net/projects/wxsvg
 
 [wiki.cvs]: https://en.wikipedia.org/wiki/Concurrent_Versions_System
+[wiki.dvcs]: https://en.wikipedia.org/wiki/Distributed_version_control
 [wiki.git]: https://en.wikipedia.org/wiki/Git
 [wiki.rsyn]: https://en.wikipedia.org/wiki/Rsync
 [wiki.svn]: https://en.wikipedia.org/wiki/Apache_Subversion
