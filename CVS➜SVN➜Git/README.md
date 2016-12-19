@@ -1,4 +1,4 @@
-## Converting [CVS][cvs] & [Subversion (SVN)][svn] repositories to [Git][git]
+## Migrating [CVS][cvs] ➜ [Subversion][svn] (SVN) ➜ [Git][git]
 
 
 <a name="1"></a>
