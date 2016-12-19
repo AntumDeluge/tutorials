@@ -19,6 +19,7 @@ The following utilities are used in these tutorials:
 + [cvs2svn][] ([Ubuntu][deb.cvs2svn])
 + [git][] ([Ubuntu][deb.git])
 + [git-svn][] ([Ubuntu][deb.git-svn])
++ perl
 + [rsync][] ([Ubuntu][deb.rsync])
 + [svnadmin][svn] ([Ubuntu][deb.svn])
 + [svnrdump][svn] ([Ubuntu][deb.svn])
@@ -32,19 +33,18 @@ The following utilities are used in these tutorials:
 <a name="git-svn"></a>
 ### Clone & convert a remote Subversion repository with git-svn
 
-<span style="font-size: 14px; font-style: italic;">
-Requirements: <span style="color: blue;">git-svn</span>
+***Requirements: git-svn***
 
 
-The [*git-svn*][man.git-svn] command, generally invoked as '<span style="color: blue; font-style: italic;">git svn</span>', is a tool for managing Subversion repositories with Git. It "<span style="font-style: italic;">can track a standard Subversion repository</span>". As I understand it, it basically allows you to manage a Subversion repository as though it were a [distributed version control system][wiki.dvcs]. A repository can be followed if is layed out with the common *trunk*, *branches*, & *tags* directories by using the <span style="color: blue; font-style: italic;">--stdlayout</span> option. Otherwise, <span style="color: blue; font-style: italic;">-T</span> (trunk), <span style="color: blue; font-style: italic;">-b</span> (branch), and/or <span style="color: blue; font-style: italic;">-t</span> (tags) must be used.
+The [*git-svn*][man.git-svn] command, generally invoked as '<span style="color: blue; font-style: italic;">git svn</span>', is a tool for managing Subversion repositories with Git. It "<span style="font-style: italic;">can track a standard Subversion repository</span>". As I understand it, it basically allows you to manage a Subversion repository as though it were a [*distributed version control system*][wiki.dvcs]. A repository can be followed if it is layed out with the common *trunk*, *branches*, & *tags* directories by using the <span style="color: blue; font-style: italic;">--stdlayout</span> option. Otherwise, <span style="color: blue; font-style: italic;">-T</span> (trunk), <span style="color: blue; font-style: italic;">-b</span> (branch), and/or <span style="color: blue; font-style: italic;">-t</span> (tags) must be used.
 
-Of the methods laid out here, this is probably the simplest. The only step is to use <span style="color: blue; font-style: italic;">git svn</span> to clone the remote repository:
+Of the methods laid out here, this is probably the simplest. The only step is to use <span style="color: blue;">*git-svn*</span> to clone the remote repository:
 
 ```
 $ git svn clone --stdlayout remote-svn-repo local-repo
 ```
 
-The local '*local-repo*' is automatically converted. If you don't want Subversion revision information appended to the Git commit messages, add "<span style="color: blue;">*--no-metadata*</span> to the command:
+The *local-repo* is automatically converted. If you don't want Subversion revision information appended to the Git commit messages, add "<span style="color: blue;">*--no-metadata*</span>" to the command:
 
 ```
 $ git svn clone --stdlayout --no-metadata remote-svn-repo local-repo
@@ -60,11 +60,10 @@ $ git svn clone --stdlayout svn://svn.code.sf.net/p/debreate/svnroot debreate-gi
 <a name="usernames"></a>
 ### Transfer usernames & emails to new Git repository
 
-<span style="font-size: 14px; font-style: italic;">
-Requirements: <span style="color: blue;">Perl</span>, <span style="color: blue;">Subversion</span>, <span style="color: blue;">git-svn</span>
+***Requirements: Perl, Subversion, git-svn***
 
 
-If you want to transfer usernames/emails to the Git repository, there is another step that must be taken first. Checkout a working copy of the main branch of the remote repository:
+If you want to transfer usernames/emails to the Git repository, there is another step that must be taken beforehand. Checkout a working copy of the main branch of the remote repository:
 
 ```
 $ svn co remote-repo-url/branch local
@@ -86,7 +85,7 @@ user2 = Gamer Girl <ggirl123@gamesrcool.net>
 ...
 ```
 
-Now when you invoke <span style="color: blue;">*svn git*</span> command, use the <span style="color: blue;">--authors-file</span> option:
+Now when you invoke the ***svn git*** command, use the ***--authors-file*** option:
 
 ```
 $ git svn clone --stdlayout --authors-file=users.txt remote-svn-repo local-repo
@@ -102,7 +101,7 @@ If you get an error "*Author: (no author) not defined in authors file*", add the
 <a name="3.2"></a>
 ### Use a local copy of a full repository (not just a working copy, e.g. svn checkout)
 
-The following two methods are only given for informational purposes, since you can do the same thing in less steps with the previous method.
+*The following is given only for informational purposes, since you can do the same thing in less steps with the previous method.*
 
 To make a local copy of a Subversion repository, if you don't already have one, you can use one of the following.
 
@@ -110,12 +109,11 @@ To make a local copy of a Subversion repository, if you don't already have one, 
 <a name="svnsync"></a>
 #### Create a local copy using svnsync & svnadmin
 
-<span style="font-size: 14px; font-style: italic;">
-Requirements: <span style="color: blue;">Subversion</span>
-</span>
+*Requirements: Subversion*
 
 
-Create an empty repository with <span style="color: blue;">*svnadmin create*</span>:
+Create an empty repository with ***svnadmin create***:
+
 ```
 $ svnadmin create local-repo
 ```
@@ -127,13 +125,13 @@ $ echo '#!/bin/sh' > local-repo/hooks/pre-revprop-change
 $ chmod 0755 local-repo/hooks/pre-revprop-change
 ```
 
-Initialize the repository with <span style="color: blue;">*svnsync init*</span>. The path to the local repository must use the '*file://*' protocol & must be an absolute path:
+Initialize the repository with ***svnsync init***. The path to the local repository must use the '*file://*' protocol & must be an absolute path:
 
 ```
 $ svnsync init file:///path/to/local-repo remote-repo-url
 ```
 
-Finally, use <span style="color: blue;">*svnsync sync*</span> to bring the repository up to date:
+Finally, use ***svnsync sync*** to bring the repository up to date:
 
 ```
 $ svnsync sync file:///path/to/local-repo
@@ -148,12 +146,10 @@ $ svn co file:///path/to/local-repo/branch working-copy
 <a name="svnrdump"></a>
 #### Create a local copy using svnrdump
 
-<span style="font-size: 14px; font-style: italic;">
-Requirements: <span style="color: blue;">Subversion</span>
-</span>
+*Requirements: Subversion*
 
 
-With the <span style="color: blue;">*svnrdump*</span> command you can dump the contents of a remote repository to a local file: 
+With the ***svnrdump*** command you can dump the contents of a remote repository to a local file: 
 
 ```
 $ svnrdump dump remote-repo-url > dump-file
@@ -184,12 +180,10 @@ Once again, you can now check out a working copy.
 <a name="localsvn"></a>
 #### Convert local Subversion repo to Git
 
-<span style="font-size: 14px; font-style: italic;">
-Requirements: <span style="color: blue;">git-svn</span>
-</span>
+*Requirements: git-svn*
 
 
-Converting a local repository with <span style="color: blue;">*git-svn*</span> is the same, just use the "*file://*" protocol:
+Converting a local repository with ***git-svn*** is the same, just use the "*file://*" protocol:
 
 ```
 $ git svn clone --stdlayout --authors-file=users.txt file:///path/to/local-repo git-repo
@@ -200,16 +194,14 @@ $ git svn clone --stdlayout --authors-file=users.txt file:///path/to/local-repo 
 ---
 ## 4: [CVS to Subversion or Git](#contents)
 
-This section will show you how to convert a CVS repository to Git. But the method shown here requires that it first be converted to a Subversion repository (See: [Subversion to Git](#svntogit)).
+This section will show you how to convert a CVS repository to Git. But the method shown here requires that it first be converted to a Subversion repository.
 
-For this section you will need <span style="color: blue;">*rsync*</span>, <span style="color: blue;">*cvs2svn*</span>, & <span style="color: blue;">*svnadmin*</span>.
+*Requirements: rsync, cvs2svn, & svnadmin*
 
-### Make a local copy of the CVS repository
 
-<span style="font-size: 14px; font-style: italic;">
-Requirements: <span style="color: blue;">rsync</span>
-</span>
+***TODO: Look up options for cvs2svn***
 
+Make a local copy of the CVS repository with ***rsync***:
 
 ```
 $ rsync -av --delete-delay rsync://remote-repo-path/* local-repo
@@ -226,17 +218,7 @@ Here is an example for the [wxSVG][wxsvg] project hosted at SourceForge:
 $ rsync -av --delete-delay rsync://wxsvg.cvs.sourceforge.net/cvsroot/wxsvg/* wxsvg-cvs-copy
 ```
 
-
-### Convert the local repository to a Subversion dump file
-
-<span style="font-size: 14px; font-style: italic;">
-Requirements: <span style="color: blue;">cvs2svn</span>
-</span>
-
-<span style="font-size: 14px; font-style: italic;">
-TODO: Look up options for cvs2svn
-</span>
-
+Convert the local repository to a Subversion dump file with ***cvs2svn***:
 
 ```
 $ cvs2svn --dumpfile=dump-file local-repo
@@ -248,14 +230,7 @@ Here is an example for the wxSVG backup above:
 $ cvs2svn --dumpfile=wxsvg.svndump wxsvg-cvs-copy
 ```
 
-### Convert the Subversion dump file to a local Git repository
-
-<span style="font-size: 14px; font-style: italic;">
-Requirements: <span style="color: blue;">svnadmin</span>
-</span>
-
-
-From this point, you can follow the instructions under [**Subversion to Git**](#svndump-to-git).
+See above for converting the dump file to a local Subversion repository, & in turn, using ***git-svn*** to convert that to a Git repository.
 
 
 ---
