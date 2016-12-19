@@ -34,7 +34,7 @@ For this section you will need <span style="color: blue;">rsync</span>, <span st
 
 
 <a name="3.1"></a>
-#### 3.1: Method 1: Clone a remote repository with git-svn
+### 3.1: Method 1 : Clone a remote repository with git-svn
 
 The [*git-svn*][man.git-svn] command, generally invoked as '<span style="color: blue; font-style: italic;">git svn</span>', is a tool for managing Subversion repositories with Git. It "<span style="font-style: italic;">can track a standard Subversion repository</span>". As I understand it, it basically allows you to manage a Subversion repository as though it were a [distributed version control system][wiki.dvcs]. A repository can be followed if is layed out with the common *trunk*, *branches*, & *tags* directories by using the <span style="color: blue; font-style: italic;">--stdlayout</span> option. Otherwise, <span style="color: blue; font-style: italic;">-T</span> (trunk), <span style="color: blue; font-style: italic;">-b</span> (branch), and/or <span style="color: blue; font-style: italic;">-t</span> (tags) must be used.
 
@@ -52,17 +52,35 @@ Here is an example for the [Debreate][debreate] project hosted at [SourceForge][
 $ git svn clone --stdlayout svn://svn.code.sf.net/p/debreate/svnroot debreate-git
 ```
 
+If you want to transfer usernames/emails to the Git repository, you must first checkout a working copy of the Subversion repository:
+
+```
+$ svn co remote-repo-url local
+```
+
+Change to the local working copy & run the following command to generate a "*users.txt*" file:
+
+```
+$ cd local
+$ svn log --xml | grep author | sort -u | perl -pe 's/.*>(.*?)<.*/$1 = /' | tee ../users.txt
+```
+
+A list of usernames found in the Subversion tree will be added to the file. You need to manually fill out the new Name/Username & email for the Git repository:
+
+```
+user1 = SomeGuy <someguy@someplace.com>
+user2 = Gamer Girl <ggirl123@gamesrcool.net>
+...
+...
+```
+
 
 <a name="3.2"></a>
-### 3.2: Get a local copy of a full repository (not just a working copy, e.g. svn checkout)
+### 3.2: Method 2 : Get a local copy of a full repository (not just a working copy, e.g. svn checkout)
 
 
-<a name="3.2.2"></a>
-#### 3.1.2: Method 2: Create a complete local copy of a remote repository
-
-
-<a name="3.2.2.1"></a>
-##### 3.2.2.1: Option 1: Using svnadmin & svnsync
+<a name="3.2.1"></a>
+#### 3.2.1: Option 1 : Using svnadmin & svnsync
 
 Create an empty repository with <span style="color: blue; font-style: italic;">svnadmin create</span>:
 ```
@@ -94,8 +112,8 @@ You can now checkout a working copy of the repository:
 $ svn co file:///path/to/local-repo/branch working-copy
 ```
 
-<a name="3.2.2.2"></a>
-##### 3.2.2.2: Option 2: Using svnrdump to create a dump file
+<a name="3.2.2"></a>
+##### 3.2.2: Option 2 : Using svnrdump to create a dump file
 
 With the <span style="color: blue; font-style: italic;">svnrdump</span> command you can dump the contents of a remote repository to a local file: 
 
@@ -110,13 +128,13 @@ $ svnrdump dump svn://svn.code.sf.net/p/debreate/svnroot debreate-svn.dump
 ```
 
 
-**Converting dump to local repository (optional)**
+**Converting dump to local repository**
 
 Using <span style="color: blue; font-style: italic;">svnadmin</span>, a local repository can be created from the dump:
 
 ```
 $ svnadmin create local-repo
-$ svnadmin load local-repo < [dump-file]
+$ svnadmin load local-repo < dump-file
 ```
 
 Once again, you can now check out a working copy.
