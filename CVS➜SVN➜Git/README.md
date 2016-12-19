@@ -202,6 +202,7 @@ This section will show you how to convert a CVS repository to Git. But the metho
 + ***TODO: Look up options for [cvs2svn][man.cvs2svn]***
 + ***TODO: Look up options for [rsync][man.rsync]***
 + ***TODO: Create section for [cvs2git][man.cvs2git] (included with cvs2svn)***
++ ***TODO: Create section for [git-cvsimport][man.git-cvsimport] (in [git-cvs][git-cvsimport] package)***
 
 Make a local copy of the CVS repository with ***rsync***:
 
@@ -250,6 +251,7 @@ See above for converting the dump file to a local Subversion repository, & in tu
 [cvs]: http://savannah.nongnu.org/projects/cvs
 [cvs2svn]: http://cvs2svn.tigris.org/
 [git]: http://git-scm.com/
+[git-cvsimport]: https://git-scm.com/docs/git-cvsimport
 [git-svn]: https://git-scm.com/docs/git-svn
 [perl]: https://www.perl.org/
 [rsync]: https://rsync.samba.org/
@@ -257,6 +259,7 @@ See above for converting the dump file to a local Subversion repository, & in tu
 
 [deb.cvs2svn]: http://packages.ubuntu.com/cvs2svn
 [deb.git]: http://packages.ubuntu.com/git
+[deb.git-cvs]: http://packages.ubuntu.com/search?keywords=git-cvs
 [deb.git-svn]: http://packages.ubuntu.com/git-svn
 [deb.perl]: http://packages.ubuntu.com/perl
 [deb.rsync]: http://packages.ubuntu.com/rsync
@@ -264,6 +267,7 @@ See above for converting the dump file to a local Subversion repository, & in tu
 
 [man.cvs2git]: https://linux.die.net/man/1/cvs2git
 [man.cvs2svn]: https://linux.die.net/man/1/cvs2svn
+[man.git-cvsimport]: https://linux.die.net/man/1/git-cvsimport
 [man.git-svn]: https://linux.die.net/man/1/git-svn
 [man.rsync]: https://linux.die.net/man/1/rsync
 
