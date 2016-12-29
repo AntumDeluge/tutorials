@@ -228,6 +228,12 @@ Convert the local CVS repository to Subversion with ***[cvs2svn][man.cvs2svn]***
 $ cvs2svn -s new-svn-repo local-cvs-repo
 ```
 
+***NOTE:** If your main branch is in a sub-directory, you may want to trim it out of the subversion repo by adding it to the end of CVS repository name:*
+
+```
+$cvs2svn -s new-svn-repo local-cvs-repo/branch-name
+```
+
 Optionally, the CVS repo can be converted to a Subversion dump file:
 
 ```
@@ -237,7 +243,7 @@ $ cvs2svn --dumpfile=dump-file local-cvs-repo
 Here is an example for the wxSVG backup above:
 
 ```
-$ cvs2svn --dumpfile=wxsvg.svndump wxsvg-cvs-copy
+$ cvs2svn --dumpfile=wxsvg.svndump wxsvg-cvs-copy/wxsvg
 ```
 
 See above for converting the dump file to a local Subversion repository, & in turn, using ***git-svn*** to convert that to a Git repository.
