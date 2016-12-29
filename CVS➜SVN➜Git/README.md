@@ -225,7 +225,7 @@ $ rsync -av --delete-delay rsync://wxsvg.cvs.sourceforge.net/cvsroot/wxsvg/* wxs
 Convert the local CVS repository to Subversion with ***[cvs2svn][man.cvs2svn]***:
 
 ```
-$ cvs2svn -S new-svn-repo local-cvs-repo
+$ cvs2svn -s new-svn-repo local-cvs-repo
 ```
 
 Optionally, the CVS repo can be converted to a Subversion dump file:
