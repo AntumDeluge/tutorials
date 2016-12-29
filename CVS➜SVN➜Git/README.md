@@ -199,14 +199,13 @@ This section will show you how to convert a CVS repository to Git. But the metho
 *Requirements: rsync, cvs2svn, & svnadmin*
 
 
-+ ***TODO: Look up options for [cvs2svn][man.cvs2svn]***
 + ***TODO: Create section for [cvs2git][man.cvs2git] (included with cvs2svn)***
 + ***TODO: Create section for [git-cvsimport][man.git-cvsimport] (in [git-cvs][git-cvsimport] package)***
 
 Make a local copy of the CVS repository with ***rsync***:
 
 ```
-$ rsync -av --delete-delay --progress rsync://remote-repo-path/* local-repo
+$ rsync -av --delete-delay --progress rsync://remote-repo-path/* local-cvs-repo
 ```
 
 *(Not sure if the <span style="color: blue;">**--delete-delay**</span> option is necessary.)*
@@ -223,10 +222,16 @@ Here is an example for the [wxSVG][wxsvg] project hosted at SourceForge:
 $ rsync -av --delete-delay rsync://wxsvg.cvs.sourceforge.net/cvsroot/wxsvg/* wxsvg-cvs-copy
 ```
 
-Convert the local repository to a Subversion dump file with ***cvs2svn***:
+Convert the local CVS repository to Subversion with ***[cvs2svn][man.cvs2svn]***:
 
 ```
-$ cvs2svn --dumpfile=dump-file local-repo
+$ cvs2svn -S new-svn-repo local-cvs-repo
+```
+
+Optionally, the CVS repo can be converted to a Subversion dump file:
+
+```
+$ cvs2svn --dumpfile=dump-file local-cvs-repo
 ```
 
 Here is an example for the wxSVG backup above:
