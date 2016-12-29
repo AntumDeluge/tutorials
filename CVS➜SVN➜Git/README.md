@@ -211,7 +211,7 @@ $ rsync -av --delete-delay rsync://remote-repo-path/* local-repo
 ```
 
 Explanation of arguments([rsync manpage][man.rsync]):
-+ <span style="color: blue;">**a**</span> : Archive mode
++ <span style="color: blue;">**a**</span> : Archive mode : Preserves symbolic links, devices, attributes, permissions, ownerships, etc.
 + <span style="color: blue;">**v**</span> : Verbose (optional)
 + <span style="color: blue;">**delete-delay**</span> : Find deletions during, delete after
 
