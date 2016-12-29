@@ -203,18 +203,19 @@ This section will show you how to convert a CVS repository to Git. But the metho
 + ***TODO: Create section for [cvs2git][man.cvs2git] (included with cvs2svn)***
 + ***TODO: Create section for [git-cvsimport][man.git-cvsimport] (in [git-cvs][git-cvsimport] package)***
 
-Make a local copy of the CVS repository with ***[rsync][man.rsync]***:
+Make a local copy of the CVS repository with ***rsync***:
 
 ```
-$ rsync -av --delete-delay rsync://remote-repo-path/* local-repo
+$ rsync -av --delete-delay --progress rsync://remote-repo-path/* local-repo
 ```
 
 *(Not sure if the <span style="color: blue;">**--delete-delay**</span> option is necessary.)*
 
-Explanation of arguments([rsync manpage][man.rsync]):
+Explanation of arguments ([rsync manpage][man.rsync]):
 + <span style="color: blue;">**a**</span> : Archive mode : Preserves symbolic links, devices, attributes, permissions, ownerships, etc.
 + <span style="color: blue;">**v**</span> : Verbose (optional)
 + <span style="color: blue;">**delete-delay**</span> : Find deletions during, delete after
++ <span style="color: blue;">**progress**</span> : Display file transfer progress information (optional)
 
 Here is an example for the [wxSVG][wxsvg] project hosted at SourceForge:
 
